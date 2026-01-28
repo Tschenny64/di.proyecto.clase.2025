@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">examen_ikercatala</string>
+    <string name="alumno">Alumno</string>
+    <string name="profesor">Profesor</string>
+    <string name="rol1">Alumno</string>
+    <string name="rol2">Profesor</string>
+    <string name="rol3">Alumno</string>
+    <string name="rol4">Profesor</string>
+    <string name="rol5">Alumno</string>
+    <string name="rol6">Profesor</string>
+    <string name="rol7">Alumno</string>
+    <string name="rol8">Profesor</string>
+
+    <string name="nombre_completo">%1$s %2$s</string>
+    <string name="nombre1">Pepe</string>
+    <string name="nombre2">Juan</string>
+    <string name="nombre3">Lucia</string>
+    <string name="nombre4">Tobias</string>
+    <string name="nombre5">Maria</string>
+    <string name="nombre6">Manolo</string>
+    <string name="nombre7">David</string>
+    <string name="nombre8">Juana</string>
+
+
+    <!-- AÑADIR PERSONA -->
+
+    <string name="titulo_anadirpersona">Añadir Persona</string>
+    <string name="codigo">Código:</string>
+    <string name="rol">Elige el rol</string>
+    <string name="nombre">Nombre</string>
+
+
+    <string name="primero">Primero</string>
+    <string name="segundo">Segundo</string>
+    <string name="nia">NIA</string>
+    <string name="curso">Curso</string>
+    <string name="anadir">Añadir</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="tutor">Tutor</string>
+
+
+
+    <string name="tipo_pizza">Tipo de pizza:</string>
+</resources>

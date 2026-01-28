@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ud6_ejemplo1</string>
+    <string name="error_de_conexion">Error de conexión</string>
+    <string name="cargando">Cargando</string>
+</resources>

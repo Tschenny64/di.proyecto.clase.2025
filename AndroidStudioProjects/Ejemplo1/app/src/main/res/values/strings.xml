@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Ejemplo1</string>
+    <string name="tira" >Clica</string>
+    <string name="bandera"> Bandera %1$s</string>
+</resources>

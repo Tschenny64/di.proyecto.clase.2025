@@ -1,0 +1,70 @@
+﻿using di.proyecto.clase._2025.Backend.Modelos;
+using di.proyecto.clase._2025.MVVM;
+using MahApps.Metro.Controls;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace di.proyecto.clase._2025.Frontend_visual_.Dialogo
+{
+    /// <summary>
+    /// Interaction logic for DialogoArticulo.xaml
+    /// </summary>
+    public partial class DialogoArticulo : MetroWindow
+    {
+        private MVArticulo _mvArticulo;
+        public DialogoArticulo(MVArticulo mvArticulo)
+        {
+            InitializeComponent();
+            _mvArticulo = mvArticulo;
+        }
+
+
+        /*private async void diagArticulo_Loaded(object sender, RoutedEventArgs e)
+        { 
+            // Estado: valores fijos o tabla auxiliar
+            cmbEstado.ItemsSource = new List<string> { "Nuevo", "Usado", "Dañado" };
+            await _mvArticulo.Inicializa();
+            this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(_mvArticulo.OnErrorEvent));
+            //Esta línea enlaza la interfaz con el MV
+            //SI NO SE PONE DATACONTEXT NO FUNCIONARÁ EL ITEMSOURCE
+            DataContext = _mvArticulo;
+        }*/
+
+        public async Task Inicializa(Articulo articulo)
+        {
+            await _mvArticulo.Inicializa();
+            _mvArticulo.articulo = articulo;
+            this.AddHandler(Validation.ErrorEvent, new RoutedEventHandler(_mvArticulo.OnErrorEvent));
+            DataContext = _mvArticulo;
+        }
+
+
+        private async void btnGuardarArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            try { 
+                bool guardado = await _mvArticulo.GuardarArticuloAsync();
+                 if (guardado)
+            {
+                MessageBox.Show("Artículo guardado correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+            } else { 
+                MessageBox.Show("Error al guardar ","Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error inesperado: " + ex.Message,
+                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnCancelarArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
+        private void cmbDepartamento_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+    }
+}

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Ejercicio3 </string>
+    <string name="nombre_completo">%1$s %2$s</string>
+    <string name="dni">%1$s</string>
+
+    <string name="nombre1">Joan</string>
+    <string name="apellido1">Ayuso</string>
+    <string name="dni1">812387912</string>
+
+    <string name="nombre2">MARIO</string>
+    <string name="apellido2">AYIYI</string>
+    <string name="dni2">12345</string>
+
+    <string name="nombre3">IKER</string>
+    <string name="apellido3">CATALA</string>
+    <string name="dni3">098000</string>
+
+    <string name="nombre4">EMILIO</string>
+    <string name="apellido4">SANXE</string>
+    <string name="dni4">2222222</string>
+
+    <string name="nombre5">ANGEL</string>
+    <string name="apellido5">SANCHIS</string>
+    <string name="dni5">999999999</string>
+
+</resources>
