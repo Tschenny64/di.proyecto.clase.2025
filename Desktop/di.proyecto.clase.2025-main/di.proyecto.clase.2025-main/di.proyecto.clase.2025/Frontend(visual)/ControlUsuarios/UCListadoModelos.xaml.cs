@@ -57,5 +57,20 @@ namespace di.proyecto.clase._2025.Frontend_visual_.ControlUsuarios
         {
 
         }
+
+        private void cbTipoArticulo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _mvArticulo.Filtrar();
+        }
+
+        private void txtNombreModelo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _mvArticulo.Filtrar();
+        }
+
+        private void btnLimpiarFiltros_Click(object sender, RoutedEventArgs e)
+        {
+            _mvArticulo.LimpiarFiltros();
+        }
     }
 }

@@ -40,18 +40,47 @@ namespace di.proyecto.clase._2025.Frontend_visual_.ControlUsuarios
 
         }
 
-        private void miEditarArticulo_Click(object sender, RoutedEventArgs e)
+        private async void miEditarArticulo_Click(object sender, RoutedEventArgs e)
         {
             _dialogoArticulo = _serviceProvider.GetRequiredService<DialogoArticulo>();
-            _dialogoArticulo.Inicializa(_mvArticulo.articulo);
+            await _dialogoArticulo.Inicializa(_mvArticulo.articulo);
             _dialogoArticulo.ShowDialog();
-
-
+            if (_dialogoArticulo.DialogResult == true)
+            {
+                // Refrescar la lista de artículos después de editar
+                _mvArticulo.listaArticulos.Refresh();
+            }
         }
+
 
         private void miBorrarArticulo_Click(object sender, RoutedEventArgs e)
         {
             // Lógica para borrar el artículo seleccionado
+        }
+
+        private void dpFechaInicial_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void dpFechaFinal_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void btnAplicarFiltroFechas_Click(object sender, RoutedEventArgs e)
+        {
+            _mvArticulo.FiltrarFechas();
+        }
+
+        private void txtNumeroSerie_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void cbEspacioArticulo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

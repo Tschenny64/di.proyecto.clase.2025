@@ -33,5 +33,11 @@ namespace di.proyecto.clase._2025.Backend.Servicios_Repositorio_
                 throw;
             }
         }
+        public async Task AddAsync(Articulo articulo)
+        {
+            _context.Articulos.Add(articulo);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

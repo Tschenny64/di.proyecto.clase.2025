@@ -31,6 +31,7 @@ namespace di.proyecto.clase._2025
         private UCListadoModelos _ucListadoModelos;
         private UCListadoArticulos _ucListadoArticulos;
         private UCListadoUsuarios _ucListadoUsuarios;
+        private UCAdministracion _ucAdministracion;
         //serviceprovider se encarga de crear los new automaticamente
         public MainWindow(DialogoModeloArticulo dialogoModeloArticulo,
                           DialogoArticulo dialogoArticulo, 
@@ -38,7 +39,8 @@ namespace di.proyecto.clase._2025
                           DialogoUsuario dialogoUsuario, 
                           UCListadoModelos ucListadoModelos, 
                           UCListadoArticulos ucListadoArticulos,
-                          UCListadoUsuarios ucListadoUsuarios)
+                          UCListadoUsuarios ucListadoUsuarios,
+                          UCAdministracion ucAdministracion)
         {
             InitializeComponent();
             _dialogoArticulo = dialogoArticulo;
@@ -48,20 +50,22 @@ namespace di.proyecto.clase._2025
             _ucListadoModelos = ucListadoModelos;
             _ucListadoArticulos = ucListadoArticulos;
             _ucListadoUsuarios = ucListadoUsuarios;
+            _ucAdministracion = ucAdministracion;
 
         }
 
-        private void btnAddModeloArticulo_Click(object sender, RoutedEventArgs e)
+        private async void btnAddModeloArticulo_Click(object sender, RoutedEventArgs e)
         {
-            _dialogoModeloArticulo.ShowDialog();
             _dialogoModeloArticulo = _serviceProvider.GetRequiredService<DialogoModeloArticulo>();
-
+            await _dialogoModeloArticulo.Inicializa(new Modeloarticulo());
+            _dialogoModeloArticulo.ShowDialog();
         }
 
-        private void btnAddArticulo_Click(object sender, RoutedEventArgs e)
+        private async void btnAddArticulo_Click(object sender, RoutedEventArgs e)
         {
-            _dialogoArticulo.ShowDialog();
             _dialogoArticulo = _serviceProvider.GetRequiredService<DialogoArticulo>();
+            await _dialogoArticulo.Inicializa(new Articulo());
+            _dialogoArticulo.ShowDialog();
         }
 
         private void btnAddUsuario_Click(object sender, RoutedEventArgs e)
@@ -84,6 +88,12 @@ namespace di.proyecto.clase._2025
         {
             panelPrincipal.Children.Clear();
             panelPrincipal.Children.Add(_ucListadoUsuarios);
+        }
+
+        private void UCAdministracion_Click(object sender, RoutedEventArgs e)
+        {
+            panelPrincipal.Children.Clear();
+            panelPrincipal.Children.Add(_ucAdministracion);
         }
     }
 }

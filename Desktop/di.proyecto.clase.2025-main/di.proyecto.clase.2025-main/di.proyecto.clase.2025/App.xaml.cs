@@ -70,12 +70,17 @@ namespace di.proyecto.clase._2025
                 services.AddScoped<EspacioRepository>();
             services.AddScoped<RolRepository>();
             services.AddScoped<TipoUsuarioRepository>();
+            services.AddScoped<GenericRepository<Espacio>>();
+            services.AddScoped<GenericRepository<Departamento>>();
                 // Registramos las interfaces de usuario
                 services.AddTransient<Login>();
                 //services.AddTransient<UCArticulos>();
                 services.AddTransient<UCListadoModelos>();
             services.AddTransient<UCListadoArticulos>();
             services.AddTransient<UCListadoUsuarios>();
+            services.AddTransient<UCAdministracion>();
+            services.AddTransient<UCArbolEspacio>();
+            services.AddTransient<UCArbolDepartamentos>();
             services.AddTransient<DialogoModeloArticulo>();
                 services.AddTransient<DialogoArticulo>();
                 services.AddTransient<DialogoUsuario>();
@@ -83,6 +88,8 @@ namespace di.proyecto.clase._2025
             //el framework recomienda que los MV sean transient.
             services.AddTransient<MVArticulo>();
             services.AddTransient<MVUsuario>();
+            services.AddTransient<MVEspacio>();
+            services.AddTransient<MVDepartamento>();
         }
 
             //ESTE CODIGO HACE QUE EL LOGIN SEA LA PRIMERA VENTANA EN ABRIRSE AL EJECUTAR

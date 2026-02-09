@@ -1154,3 +1154,10 @@ C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-ma
 C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\Frontend(visual)\ControlUsuarios\UCListadoArticulos.baml
 C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\Frontend(visual)\ControlUsuarios\UCListadoUsuarios.g.cs
 C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\Frontend(visual)\ControlUsuarios\UCListadoUsuarios.baml
+C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\Frontend(visual)\ControlUsuarios\UCAdministracion.g.cs
+C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\Frontend(visual)\ControlUsuarios\UCArbolEspacio.g.cs
+C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\Frontend(visual)\ControlUsuarios\UCAdministracion.baml
+C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\Frontend(visual)\ControlUsuarios\UCArbolEspacio.baml
+C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\Frontend(visual)\ControlUsuarios\UCArbolDepartamentos.g.cs
+C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\obj\Debug\net8.0-windows\Frontend(visual)\ControlUsuarios\UCArbolDepartamentos.baml

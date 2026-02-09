@@ -40,6 +40,30 @@ namespace di.proyecto.clase._2025.MVVM
         private List<Usuario> _listaUsuarios;
         private List<Espacio> _listaEspacios;
         private List<Departamento> _listaDepartamentos;
+       
+     
+
+        private List<Predicate<Modeloarticulo>> _criterios;
+        private List<Predicate<Articulo>> _criteriosArticulo;
+        private Tipoarticulo _tipoarticuloSeleccionado;
+        private Predicate<Modeloarticulo> _criterioTipoArticulo;
+        private String _textoNombre;
+        private String _textoNumSerie;
+        private Predicate<Modeloarticulo> _criterioNombreTipo;
+        private Predicate<Articulo> _criterioArticulo;
+        private Predicate<Articulo> _criterioFechaArticulo;
+        private Predicate<object> _predicadoFiltros;
+
+        private Predicate<Articulo> _criterioNumSerieArticulo;
+        private Predicate<object> _predicadoFechas;
+
+
+        private Espacio _espacioSeleccionado;
+        private Predicate<Articulo> _criterioEspacioArticulo;
+        private Predicate<object> _predicadoEspacio;
+
+        private DateTime? _fechaInicial;
+        private DateTime? _fechaFinal;
 
         #endregion
         #region Getters y Setters
@@ -50,6 +74,42 @@ namespace di.proyecto.clase._2025.MVVM
         public List<Espacio> listaEspacios => _listaEspacios;
         public List<Departamento> listaDepartamentos => _listaDepartamentos;
 
+        public DateTime? fechaInicial
+        {
+            get => _fechaInicial;
+            set
+            {
+                SetProperty(ref _fechaInicial, value);
+
+                if (fechaFinal.HasValue && fechaInicial > fechaFinal)
+                {
+                    MensajeError.Mostrar("ERROR EN FECHAS", "La fecha inicial no puede ser mayor que la fecha final.", 0);
+
+                    _fechaInicial = null;
+                    OnPropertyChanged(nameof(fechaInicial));
+                    return;
+                }
+            }
+            
+        }
+
+        public String textoNumSerie
+        {
+            get => _textoNumSerie;
+            set => SetProperty(ref _textoNumSerie, value);
+        }
+
+        public Espacio espacioSeleccionado
+        {
+            get => _espacioSeleccionado;
+            set => SetProperty(ref _espacioSeleccionado, value);
+        }
+
+        public DateTime? fechaFinal
+        {
+            get => _fechaFinal;
+            set => SetProperty(ref _fechaFinal, value);
+        }
 
 
 
@@ -69,6 +129,12 @@ namespace di.proyecto.clase._2025.MVVM
         {
             get => _usuario;
             set => SetProperty(ref _usuario, value);
+        }
+
+        public string textoNombre
+        {
+            get => _textoNombre;
+            set => SetProperty(ref _textoNombre, value);
         }
         #endregion
         // Aquí puedes añadir propiedades y métodos específicos para el ViewModel de Artículo
@@ -93,14 +159,12 @@ namespace di.proyecto.clase._2025.MVVM
         {
             try
             {
-                _listaTipoArticulos = await GetAllAsync<Tipoarticulo>(_tipoArticuloRepository);
-                _listaDepartamentos = await GetAllAsync<Departamento>(_departamentoRepository);
-                _listaUsuarios = await GetAllAsync<Usuario>(_usuarioRepository);
-                _listaEspacios = await GetAllAsync<Espacio>(_espacioRepository);
-                _listaModelosArticulos = await GetAllAsync<Modeloarticulo>(_modeloArticuloRepository);
-                _listaArticulos = await GetAllAsync<Articulo>(_articuloRepository);
-                listaModelosArticulos = new ListCollectionView(_listaModelosArticulos);
-                listaArticulos = new ListCollectionView(_listaArticulos);
+                await InicializaListas();
+                InicializaCriterios();
+                _predicadoFiltros = new Predicate<object>(FiltroCriterios);
+                _predicadoFechas = new Predicate<object>(FiltroCriteriosFecha);
+                fechaFinal = DateTime.Now;
+
                 //_articulo.Fechaalta = DateTime.Now;
             }
             catch (Exception ex)
@@ -108,6 +172,121 @@ namespace di.proyecto.clase._2025.MVVM
                 MensajeError.Mostrar("GESTIÓN ARTÍCULOS", "Error al cargar los tipos de artículos\n" +
                     "No puedo conectar con la base de datos", 0);
             }
+        }
+
+        #region Metodos privados
+        private void InicializaCriterios()
+        {
+            _criterioTipoArticulo = new Predicate<Modeloarticulo>(m =>
+                _tipoarticuloSeleccionado == null ||
+                m.Tipo == _tipoarticuloSeleccionado.Idtipoarticulo ||
+                (m.TipoNavigation != null && m.TipoNavigation.Idtipoarticulo == _tipoarticuloSeleccionado.Idtipoarticulo)
+            );
+            _criterioNombreTipo = new Predicate<Modeloarticulo>(m =>
+                string.IsNullOrEmpty(_textoNombre) ||
+                (!string.IsNullOrEmpty(m.Nombre) && m.Nombre.ToLower().StartsWith(_textoNombre.ToLower()))
+            );
+            _criterioFechaArticulo = new Predicate<Articulo>(a => a.Fechaalta >= fechaInicial && a.Fechaalta <= fechaFinal);
+
+            _criterioNumSerieArticulo = new Predicate<Articulo>(a => !string.IsNullOrEmpty(_textoNumSerie)
+                                                            && a.Numserie!.ToLower().Contains(_textoNumSerie.ToLower()));
+            _criterioEspacioArticulo = new Predicate<Articulo>(a =>
+                _espacioSeleccionado == null ||
+                a.Espacio == _espacioSeleccionado.Idespacio ||
+                (a.EspacioNavigation != null && a.EspacioNavigation.Idespacio == _espacioSeleccionado.Idespacio)
+            );
+        }
+        private async Task InicializaListas()
+        {
+            _listaTipoArticulos = await GetAllAsync<Tipoarticulo>(_tipoArticuloRepository);
+            _listaDepartamentos = await GetAllAsync<Departamento>(_departamentoRepository);
+            _listaUsuarios = await GetAllAsync<Usuario>(_usuarioRepository);
+            _listaEspacios = await GetAllAsync<Espacio>(_espacioRepository);
+            _listaModelosArticulos = await GetAllAsync<Modeloarticulo>(_modeloArticuloRepository);
+            _listaArticulos = await GetAllAsync<Articulo>(_articuloRepository);
+            listaModelosArticulos = new ListCollectionView(_listaModelosArticulos);
+            listaArticulos = new ListCollectionView(_listaArticulos);
+            _criterios = new List<Predicate<Modeloarticulo>>();
+            _criteriosArticulo = new List<Predicate<Articulo>>();
+        }
+
+        private void AddCriterios()
+        {
+            // Borramos los criterios
+            _criterios.Clear();
+            // Añadimos los criterios seleccionados
+            if (tipoarticuloSeleccionado != null) { _criterios.Add(_criterioTipoArticulo); }
+            if (!string.IsNullOrEmpty(textoNombre)) { _criterios.Add(_criterioNombreTipo); }
+        }
+
+        private void AddCriteriosFechas()
+        {
+            _criteriosArticulo.Clear();
+
+            if (fechaInicial != null && fechaFinal != null)
+                _criteriosArticulo.Add(_criterioFechaArticulo);
+
+            if (!string.IsNullOrEmpty(textoNumSerie))
+                _criteriosArticulo.Add(_criterioNumSerieArticulo);
+
+            if (espacioSeleccionado != null)
+                _criteriosArticulo.Add(_criterioEspacioArticulo);
+        }
+
+
+        private bool FiltroCriterios(object item)
+        {
+            bool correcto = true;
+            Modeloarticulo modelo = (Modeloarticulo)item;
+            if (_criterios != null)
+            {
+                correcto = _criterios.TrueForAll(x => x(modelo));
+            }
+            return correcto;
+        }
+
+        private bool FiltroCriteriosFecha(object item)
+        {
+            Articulo a = (Articulo)item;
+            return _criteriosArticulo == null || _criteriosArticulo.TrueForAll(c => c(a));
+        }
+
+        public void Filtrar()
+        {
+            AddCriterios();
+            listaModelosArticulos.Filter = _predicadoFiltros;
+        }
+        public void FiltrarFechas()
+        {
+            AddCriteriosFechas();
+            listaArticulos.Filter = _predicadoFechas;
+        }
+
+        public void LimpiarFiltros()
+        {
+            tipoarticuloSeleccionado = null;
+            textoNombre = string.Empty;
+
+            listaModelosArticulos.Filter = null;
+        }
+
+
+        /*public void LimpiarFiltrosArticulos()
+        {
+            fechaInicial = null;
+            fechaFinal = null;
+            textoNumSerie = string.Empty;
+            listaArticulos.Filter = null;
+        } */
+
+        #endregion
+
+
+
+        public Tipoarticulo tipoarticuloSeleccionado
+        {
+            get => _tipoarticuloSeleccionado;
+            set => SetProperty(ref _tipoarticuloSeleccionado, value);
         }
 
         public async Task<bool> GuardarModeloArticuloAsync()
@@ -183,26 +362,50 @@ namespace di.proyecto.clase._2025.MVVM
 
         public async Task<bool> GuardarArticuloAsync()
         {
-            bool correcto = true;
             try
             {
-                if (_articulo.Idarticulo == 0)
+                if (articulo == null) return false;
+
+                bool esNuevo = articulo.Idarticulo == 0;
+
+                // Navigation -> FK
+                if (articulo.ModeloNavigation != null)
+                    articulo.Modelo = articulo.ModeloNavigation.Idmodeloarticulo;
+
+                if (articulo.EspacioNavigation != null)
+                    articulo.Espacio = articulo.EspacioNavigation.Idespacio;
+
+                if (articulo.DepartamentoNavigation != null)
+                    articulo.Departamento = articulo.DepartamentoNavigation.Iddepartamento;
+
+                if (articulo.UsuarioaltaNavigation != null)
+                    articulo.Usuarioalta = articulo.UsuarioaltaNavigation.Idusuario;
+
+                if (articulo.Fechaalta == null)
+                    articulo.Fechaalta = DateTime.Now;
+
+                if (esNuevo)
                 {
-                    // Nuevo modelo de artículo
+                    articulo.Idarticulo = await ObtenerNuevoIdArticulo();
                     await _articuloRepository.AddAsync(articulo);
+
+                    // Para que se vea al momento en la lista
+                    _listaArticulos.Add(articulo);
+                    listaArticulos.Refresh();
                 }
                 else
                 {
-                    // Actualizar modelo de artículo existente
                     await _articuloRepository.UpdateAsync(articulo);
+                    listaArticulos.Refresh();
                 }
+
+                return true;
             }
-            catch (Exception ex)
+            catch
             {
-                // Capturamos la excepción y la registramos en el log
-                correcto = false;
+                return false;
             }
-            return correcto;
         }
+
     }
 }

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\windows10\Desktop\di.proyecto.clase.2025-main\di.proyecto.clase.2025-main\di.proyecto.clase.2025\App.xaml
-101710875765
+13213009618
 
-55164617171
+60-985952314
 242-635416190
-Frontend(visual)\ControlUsuarios\UCListadoArticulos.xaml;Frontend(visual)\ControlUsuarios\UCListadoModelos.xaml;Frontend(visual)\ControlUsuarios\UCListadoUsuarios.xaml;Frontend(visual)\Dialogo\DialogoArticulo.xaml;Frontend(visual)\Dialogo\DialogoModeloArticulo.xaml;Frontend(visual)\Dialogo\DialogoUsuario.xaml;Frontend(visual)\Dialogo\Login.xaml;Frontend(visual)\Mensajes\MensajeDialogo.xaml;Frontend(visual)\Mensajes\VentanaMensaje.xaml;MainWindow.xaml;
+Frontend(visual)\ControlUsuarios\UCAdministracion.xaml;Frontend(visual)\ControlUsuarios\UCArbolDepartamentos.xaml;Frontend(visual)\ControlUsuarios\UCArbolEspacio.xaml;Frontend(visual)\ControlUsuarios\UCListadoArticulos.xaml;Frontend(visual)\ControlUsuarios\UCListadoModelos.xaml;Frontend(visual)\ControlUsuarios\UCListadoUsuarios.xaml;Frontend(visual)\Dialogo\DialogoArticulo.xaml;Frontend(visual)\Dialogo\DialogoModeloArticulo.xaml;Frontend(visual)\Dialogo\DialogoUsuario.xaml;Frontend(visual)\Dialogo\Login.xaml;Frontend(visual)\Mensajes\MensajeDialogo.xaml;Frontend(visual)\Mensajes\VentanaMensaje.xaml;MainWindow.xaml;
 
-True
+False
 

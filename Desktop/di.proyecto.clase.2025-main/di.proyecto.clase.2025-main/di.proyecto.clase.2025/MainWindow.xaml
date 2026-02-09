@@ -106,6 +106,20 @@
                             Margin="0,0,10,0"
                             Click="btnAddUsuario_Click"/>
                     </Fluent:RibbonGroupBox>
+                    
+                    <Fluent:RibbonGroupBox
+                        x:Name="AddArbol"
+                        Header="Arbol"
+                        Margin="5">
+
+                        <Fluent:Button
+                            x:Name="UCAdministracion"
+                            Header="Arbol"
+                            LargeIcon="/Recursos/Iconos/articulo.png"
+                            Foreground="DarkOrange"
+                            Margin="0,0,10,0"
+                            Click="UCAdministracion_Click"/>
+                    </Fluent:RibbonGroupBox>
 
                 </Fluent:RibbonTabItem>
             </Fluent:Ribbon>

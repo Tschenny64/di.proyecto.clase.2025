@@ -69,18 +69,19 @@
                           Height="40"
                           FontWeight="Bold"
                           mat:HintAssist.Hint="Selecciona un modelo*"
-                          ItemsSource="{Binding modeloarticulos}"
+                          ItemsSource="{Binding listaModelosArticulos}"
                           SelectedItem="{Binding articulo.ModeloNavigation,ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}"
                           Style="{StaticResource MaterialDesignComboBox}"
                           DisplayMemberPath="Nombre"/>
 
                 <!-- Estado -->
-                <ComboBox x:Name="cmbEstado"
+                <TextBox x:Name="cmbEstado"
                           Width="230"
                           Height="40"
+                          FontWeight="Bold"
+                          mat:HintAssist.IsFloating="True"
                           Text="{Binding articulo.Estado, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                          mat:HintAssist.Hint="Selecciona un estado"
-                          Style="{StaticResource MaterialDesignComboBox}"/>
+                          mat:HintAssist.Hint="Selecciona un estado"/>
             </StackPanel>
 
             <!-- Parte derecha -->
